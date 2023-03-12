@@ -1,0 +1,10 @@
+.UserCard {
+  height: var(--user-card-height);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.UserCard:hover {
+  background-color: var(--app-background-color) ;
+}

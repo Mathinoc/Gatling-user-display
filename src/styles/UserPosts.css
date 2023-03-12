@@ -1,0 +1,39 @@
+.UserPosts {
+  background-color: white;
+  margin: 2rem auto;
+  padding: 2rem;
+  height: fit-content;
+  border-radius: var(--global-radius);
+  display: flex;
+  flex-direction: column;
+}
+
+.UserPosts__home-button {
+  background: var(--button-blue);
+  width: fit-content;
+  padding: 0.6rem 1rem;
+  transition: 250ms ease-in-out, transform 150ms ease;
+}
+
+.UserPosts__home-button:hover {
+  background: var(--button-blue-hover) ;
+}
+
+.UserPosts__user-info {
+  margin: 1rem 0;
+}
+
+.UserPosts__user-info--label {
+  font-weight: 700;
+}
+
+.UserPosts__user-info > button {
+  background-color: var(--button-orange);
+  width: fit-content;
+  margin-top: 0.3rem; 
+  padding: 0.4rem 1rem;
+  transition: 250ms ease-in-out, transform 150ms ease;
+}
+.UserPosts__user-info > button:hover {
+  background-color: var(--button-orange-hover);
+}

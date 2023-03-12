@@ -1,0 +1,14 @@
+.ProfileImage {
+  width: var(--avatar-diameter);
+  height: var(--avatar-diameter);
+  margin-right: 20px;
+  border-radius: 50%;
+  background: linear-gradient(#24275e8f, #24275eb8);
+  display: inline-block;
+}
+
+.ProfileImage > p {
+  color: white;
+  font-size: 900;
+  line-height: var(--avatar-diameter);
+}

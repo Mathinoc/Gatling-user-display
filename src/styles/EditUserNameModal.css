@@ -1,0 +1,81 @@
+.EditUserNameModal__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right:0;
+  bottom: 0;
+  background-color: rgb(0,0,0,0.7);
+  z-index: 3;
+}
+.EditUserNameModal__container{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgb(255, 255, 255);
+  border-radius: var(--global-radius);
+  padding: 50px;
+  z-index: 3;
+  width:50vw;
+  min-width: 100px;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.EditUserNameModal__container--form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.EditUserNameModal__container--form-field {
+  width: auto;
+}
+.EditUserNameModal__container--form-field  .input-error {
+  position: absolute;
+}
+
+.EditUserNameModal__container label {
+  font-weight: 500;
+  margin-right: 1rem;
+}
+
+.EditUserNameModal__container input {
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  padding: 0.75rem 0.75rem;
+  width: fit-content;
+  max-width: 250px;
+}
+
+.EditUserNameModal__container--buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.EditUserNameModal__container button {
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.5rem;
+}
+
+#button-cancel {
+  background-color: var(--button-blue);
+}
+#button-cancel:hover {
+  background-color: var(--button-blue-hover);
+  
+}
+
+#button-apply {
+  background-color: var(--button-orange);
+}
+#button-apply:hover {
+  background-color: var(--button-orange-hover);
+}

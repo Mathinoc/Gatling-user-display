@@ -1,0 +1,13 @@
+.UserList {
+  background-color: white;
+  margin: 2rem auto;
+  padding: 2rem;
+  height: fit-content;
+  border-radius: var(--global-radius);
+  display: flex;
+  flex-direction: column;
+}
+
+.UserList__loader {
+  margin: 2rem auto;
+}
