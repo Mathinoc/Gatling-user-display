@@ -1,38 +1,35 @@
+:root {
+  --header-height: 60px;
+  --user-card-height: 60px;
+  --app-background-color: #F7F7F7;
+  --gatling-blue: #24275E;
+  --avatar-diameter: 50px;
+  --border-radius-button: 5px;
+  --global-radius: 1rem;
+  --button-blue: #6161D6;
+  --button-blue-hover: #5555BE;
+  --button-orange: #f78557;
+  --button-orange-hover: #CD7258;
+}
+
+html,
+body,
+#root,
 .App {
-  text-align: center;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+p {
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a, button {
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  border: none;
+  text-decoration: none;
+  border-radius: var(--border-radius-button);
+  color: #ffffff;
 }
