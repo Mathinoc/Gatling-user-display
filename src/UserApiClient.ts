@@ -5,7 +5,7 @@ const instance = axios.create({
   timeout: 1000
 });
 
-export function getUsers (): Promise<void | AxiosResponse<any, any>> {
+function getUsers (): Promise<void | AxiosResponse<any, any>> {
   return instance
     .get('users')
     .catch((error: Error) =>
@@ -13,7 +13,7 @@ export function getUsers (): Promise<void | AxiosResponse<any, any>> {
     );
 }
 
-export function getPosts (userId: string): Promise<void | AxiosResponse<any, any>> {
+function getPosts (userId: string): Promise<void | AxiosResponse<any, any>> {
   return instance
     .get(`posts?userId=${userId}`)
     .catch((error: Error) =>
@@ -29,14 +29,16 @@ function getUser (userId: string): Promise<void | AxiosResponse<any, any>> {
     );
 }
 
-export function getUserAndPosts (userId: string): Promise<[void | AxiosResponse<any, any>, void | AxiosResponse<any, any>]> {
+function getUserAndPosts (userId: string): Promise<[void | AxiosResponse<any, any>, void | AxiosResponse<any, any>]> {
   return Promise.all([getPosts(userId), getUser(userId)]);
 }
 
-export function updateUserName (userId: number, editedUserName: string): Promise<void | AxiosResponse<any, any>> {
+function updateUserName (userId: number, editedUserName: string): Promise<void | AxiosResponse<any, any>> {
   return instance
     .patch(`users/${userId}`, { username: editedUserName })
     .catch((error: Error) =>
       console.log('Error from service while updating username: ', error)
     );
 }
+
+export { getUsers, getUserAndPosts, updateUserName };

@@ -25,7 +25,7 @@ const UserList: FunctionComponent = () => {
 
     const timer = setTimeout(() => {
       loadUsers();
-    }, 2000);
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -39,7 +39,7 @@ const UserList: FunctionComponent = () => {
   );
 
   return (
-    <div className="UserList">
+    <div className="UserList" data-testid="userList">
       {loading &&
         <div className="UserList__loader">
           <PropagateLoader loading={loading} aria-label="Loading Spinner" color={'#6161D6'} />

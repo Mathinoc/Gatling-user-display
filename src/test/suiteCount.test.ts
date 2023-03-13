@@ -98,7 +98,7 @@ describe('suiteCount function', () => {
 
   const mockResult = { app: 1, suite: 2 };
 
-  it('Should return an object with two keys and associated counts', () => {
+  it('returns an object with two keys and associated counts', () => {
     expect(suiteCount(mockUsers)).toEqual(mockResult);
   });
 });
