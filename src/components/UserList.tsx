@@ -33,7 +33,6 @@ const UserList: FunctionComponent = () => {
     <Link
       key={user.id}
       to={`/user-posts/${user.id}`}
-      style={{ textDecoration: 'none', color: 'black' }}
     >
       {<UserCard user={user} />}
     </Link>
@@ -46,12 +45,14 @@ const UserList: FunctionComponent = () => {
           <PropagateLoader loading={loading} aria-label="Loading Spinner" color={'#6161D6'} />
         </div>
       }
+
       {loadingSuccess &&
         <>
           <UserSuiteCount users={users} />
           {userDisplay}
         </>
       }
+
       {!loading && loadingSuccess && users.length === 0 && <EmptyState text="No users" />}
       {!loading && !loadingSuccess && <EmptyState text="Couldn't load users" />}
     </div>

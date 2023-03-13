@@ -6,22 +6,23 @@ import '../styles/EditUserNameModal.css';
 import { type User } from '../interfaces/User';
 import { updateUserName } from '../UserApiClient';
 
-interface formValue { username: string }
+interface FormValue { username: string }
 
-const EditUserNameModal = (
-  { setIsModalOpen, user, setUser }: {
-    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-    user: User
-    setUser: React.Dispatch<React.SetStateAction<User | undefined>>
-  }): ReactPortal => {
+interface EditPropType {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  user: User
+  setUser: React.Dispatch<React.SetStateAction<User | undefined>>
+}
+
+const EditUserNameModal = ({ setIsModalOpen, user, setUser }: EditPropType): ReactPortal => {
   const [errorApi, setErrorApi] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const submitForm = async (value: formValue): Promise<void> => {
+  const submitForm = async (value: FormValue): Promise<void> => {
     setLoading(true);
     const response = await updateUserName(user.id, value.username);
 
-    if (response && response.status === 20) {
+    if (response && response.status === 200) {
       setUser(response.data);
       setIsModalOpen(false);
     } else {

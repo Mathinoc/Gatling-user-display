@@ -27,7 +27,6 @@ const UserPosts: FunctionComponent = () => {
   useEffect(() => {
     const loadPosts = async (): Promise<void> => {
       const response = await getUserAndPosts(userId!) as [void | AxiosResponse<any, any>, void | AxiosResponse<any, any>];
-      console.log(response);
       if (response && response[0]!.status === 200 && response[1]!.status === 200) {
         setUserPosts(response[0]!.data);
         setUser(response[1]!.data);
