@@ -1,5 +1,15 @@
 ## Gatling Corp React project
 
+#### Run project
+
+Create a .env file in the root directory and add the content of the .env.example file.
+
+Run npm i to install all dependencies.
+
+Run npm start to run the app.
+
+#### Project description
+
 The goal of this small project is to create a small webapp displaying users and their related posts (data are located
 on [jsonplaceholder](https://jsonplaceholder.typicode.com)). 
 
