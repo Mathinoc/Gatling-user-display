@@ -1,19 +1,12 @@
 import React, { type FunctionComponent, useEffect, useState } from 'react';
 import { getUserAndPosts } from '../UserApiClient';
 import { useParams, useNavigate } from 'react-router-dom';
-import { type AxiosResponse } from 'axios';
 import '../styles/UserPosts.css';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 import EditUserNameModal from './EditUserNameModal';
 import EmptyState from './EmptyState';
 import { type User } from '../interfaces/User';
-
-export interface Post {
-  userId: number
-  id: number
-  title: string
-  body: string
-}
+import { type Post } from '../interfaces/Post';
 
 const UserPosts: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -26,18 +19,22 @@ const UserPosts: FunctionComponent = () => {
 
   useEffect(() => {
     const loadPosts = async (): Promise<void> => {
-      const response = await getUserAndPosts(userId!) as [void | AxiosResponse<any, any>, void | AxiosResponse<any, any>];
-      if (response && response[0]!.status === 200 && response[1]!.status === 200) {
-        setUserPosts(response[0]!.data);
-        setUser(response[1]!.data);
-        setLoadingSuccess(true);
-      }
-      setLoading(false);
+      const response = await getUserAndPosts(userId!);
+      console.log(response);
+      setUserPosts(response[0] as Post[]);
+      setUser(response[1] as User);
+      setLoadingSuccess(true);
     };
 
     const timer = setTimeout(() => {
-      loadPosts();
-    }, 2000);
+      loadPosts()
+        .catch((e) => {
+          setLoadingSuccess(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 

@@ -1,44 +1,62 @@
-import axios, { type AxiosResponse } from 'axios';
+import axios from 'axios';
+import { type User } from './interfaces/User';
+import { type Post } from './interfaces/Post';
 
 const instance = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com/',
   timeout: 1000
 });
 
-function getUsers (): Promise<void | AxiosResponse<any, any>> {
+function getUsers (): Promise<User[]> {
   return instance
     .get('users')
-    .catch((error: Error) =>
-      console.log('Error from service while getting user information: ', error)
-    );
+    .then(res => {
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        throw new Error(`Status is ${res.status}`);
+      }
+    });
 }
 
-function getPosts (userId: string): Promise<void | AxiosResponse<any, any>> {
+function getPosts (userId: string): Promise<Post[]> {
   return instance
     .get(`posts?userId=${userId}`)
-    .catch((error: Error) =>
-      console.log('Error from service while getting user posts: ', error)
-    );
+    .then(res => {
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        throw new Error(`Status is ${res.status}`);
+      }
+    });
 }
 
-function getUser (userId: string): Promise<void | AxiosResponse<any, any>> {
+function getUser (userId: string): Promise<User> {
   return instance
     .get(`users/${userId}`)
-    .catch((error: Error) =>
-      console.log('Error from service while getting user info: ', error)
-    );
+    .then(res => {
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        throw new Error(`Status is ${res.status}`);
+      }
+    });
 }
 
-function getUserAndPosts (userId: string): Promise<[void | AxiosResponse<any, any>, void | AxiosResponse<any, any>]> {
+function getUserAndPosts (userId: string): Promise<Array<Post[] | User>> {
   return Promise.all([getPosts(userId), getUser(userId)]);
 }
 
-function updateUserName (userId: number, editedUserName: string): Promise<void | AxiosResponse<any, any>> {
+function updateUserName (userId: number, editedUserName: string): Promise<User> {
   return instance
     .patch(`users/${userId}`, { username: editedUserName })
-    .catch((error: Error) =>
-      console.log('Error from service while updating username: ', error)
-    );
+    .then(res => {
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        throw new Error(`Status is ${res.status}`);
+      }
+    });
 }
 
 export { getUsers, getUserAndPosts, updateUserName };

@@ -20,15 +20,16 @@ const EditUserNameModal = ({ setIsModalOpen, user, setUser }: EditPropType): Rea
 
   const submitForm = async (value: FormValue): Promise<void> => {
     setLoading(true);
-    const response = await updateUserName(user.id, value.username);
-
-    if (response && response.status === 200) {
-      setUser(response.data);
-      setIsModalOpen(false);
-    } else {
-      setErrorApi(true);
-    }
-    setLoading(false);
+    await updateUserName(user.id, value.username)
+      .then(res => {
+        setUser(res);
+        setIsModalOpen(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setErrorApi(true);
+      })
+      .finally(() => setLoading(false));
   };
 
   return ReactDom.createPortal(

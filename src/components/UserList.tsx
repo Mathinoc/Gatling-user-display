@@ -16,15 +16,20 @@ const UserList: FunctionComponent = () => {
   useEffect(() => {
     const loadUsers = async (): Promise<void> => {
       const response = await getUsers();
-      if (response && response.status === 200) {
-        setUsers(response.data);
-        setLoadingSuccess(true);
-      }
+      setUsers(response);
+      setLoadingSuccess(true);
       setLoading(false);
     };
 
     const timer = setTimeout(() => {
-      loadUsers();
+      loadUsers()
+        .catch((e) => {
+          console.log(e);
+          setLoadingSuccess(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
