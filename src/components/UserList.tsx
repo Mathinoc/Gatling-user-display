@@ -37,7 +37,7 @@ const UserList: FunctionComponent = () => {
   const userDisplay = users.map(user =>
     <Link
       key={user.id}
-      to={`/user-posts/${user.id}`}
+      to={`/users/${user.id}/posts`}
     >
       {<UserCard user={user} />}
     </Link>

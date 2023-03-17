@@ -10,9 +10,9 @@ const App = (): JSX.Element => (
     <BrowserRouter>
       <AppBody>
         <Routes>
-          <Route path="/" element={<UsersTable />} />
-          <Route path="/user-posts/:userId" element={<UserPosts />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/users" element={<UsersTable />} />
+          <Route path="/users/:userId/posts" element={<UserPosts />} />
+          <Route path="*" element={<Navigate to="/users" replace />} />
         </Routes>
       </AppBody>
     </BrowserRouter>
