@@ -1,40 +1,21 @@
-import React, { type FunctionComponent, useEffect, useState } from 'react';
+import React, { type FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { getUsers } from '../UserApiClient';
+import { useQuery } from '@tanstack/react-query';
 import '../styles/UserList.css';
-import { type User } from '../interfaces/User';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 import EmptyState from './EmptyState';
 import UserCard from './UserCard';
 import UserSuiteCount from './UserSuiteCount';
 
 const UserList: FunctionComponent = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [loadingSuccess, setLoadingSuccess] = useState<boolean>(false);
+  const userQuery = useQuery({
+    queryKey: ['users'],
+    queryFn: getUsers,
+    staleTime: 1000 * 60 * 5 // 5 minutes
+  });
 
-  useEffect(() => {
-    const loadUsers = async (): Promise<void> => {
-      const response = await getUsers();
-      setUsers(response);
-      setLoadingSuccess(true);
-      setLoading(false);
-    };
-
-    const timer = setTimeout(() => {
-      loadUsers()
-        .catch((e) => {
-          console.log(e);
-          setLoadingSuccess(false);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const userDisplay = users.map(user =>
+  const userDisplay = (userQuery.data ?? []).map(user => // returns [] if userQuery.data is null
     <Link
       key={user.id}
       to={`/users/${user.id}/posts`}
@@ -45,21 +26,23 @@ const UserList: FunctionComponent = () => {
 
   return (
     <div className="UserList" data-testid="userList">
-      {loading &&
+
+      {userQuery.isLoading &&
         <div className="UserList__loader">
-          <PropagateLoader loading={loading} aria-label="Loading Spinner" color={'#6161D6'} />
+          <PropagateLoader loading aria-label="Loading Spinner" color={'#6161D6'} />
         </div>
       }
 
-      {loadingSuccess &&
+      {!userQuery.isLoading && userQuery.isSuccess &&
         <>
-          <UserSuiteCount users={users} />
+          <UserSuiteCount users={userQuery.data} />
           {userDisplay}
         </>
       }
 
-      {!loading && loadingSuccess && users.length === 0 && <EmptyState text="No users" />}
-      {!loading && !loadingSuccess && <EmptyState text="Couldn't load users" />}
+      {!userQuery.isLoading && userQuery.isSuccess && userQuery.data.length === 0 && <EmptyState text="No users" />}
+
+      {!userQuery.isLoading && !userQuery.isSuccess && <EmptyState text="Couldn't load users" />}
     </div>
   );
 };

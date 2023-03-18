@@ -3,8 +3,8 @@ import { type User } from './interfaces/User';
 import { type Post } from './interfaces/Post';
 
 const instance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com/',
-  timeout: 1000
+  baseURL: 'https://jsonplaceholder.typicode.com/'
+  // timeout: 1000
 });
 
 function getUsers (): Promise<User[]> {
