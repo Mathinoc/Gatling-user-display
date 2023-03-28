@@ -72,7 +72,7 @@ const UserPosts: FunctionComponent = () => {
 
       {loading &&
         <div className="UserList__loader">
-          <PropagateLoader loading={loading} aria-label="Loading Spinner" color={'#6161D6'} />
+          <PropagateLoader loading aria-label="Loading Spinner" color={'#6161D6'} />
         </div>
       }
 
